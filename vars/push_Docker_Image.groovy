@@ -1,7 +1,9 @@
-def push_Docker_Image(String DockerHubUserName, String DockerHubPass, Sringe ImageName, String ImageTag){
-  echo "start pushing Image on Docker Hub"
-  sh "docker login -u ${DockerHubUserName} -p {DockerhubPass}"
-  sh "docker tag ${ImageName}:${ImageTag} ${DockerHubUserName}/${ImageName}:${ImageTag}"
-  sh "docker push ${DockerHubUserName}/${ImageName}:${ImageTag}"
-  echo "Docker Image pushed on Dockerhub successfully"
+def push_Docker_Image(Sringe ImageName, String ImageTag, String credentialsId, String passwordVariable, String usernameVariable){
+  withCredentials([usernamePassword(credentialsId: dockerHubCred,passwordVariable: dockerHubPass,usernameVariable: dockerHubUser)]){
+      echo "start pushing Image on Docker Hub"
+      sh "docker login -u ${usernameVariable} -p ${passwordVariable}"
+      sh "docker tag ${ImageName}:${ImageTag} ${usernameVariable}/${ImageName}:${ImageTag}"
+      sh "docker push ${usernameVariable}/${ImageName}:${ImageTag}"
+      echo "Docker Image pushed on Dockerhub successfully"
+    }
 }
