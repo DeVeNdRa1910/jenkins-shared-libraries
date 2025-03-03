@@ -4,5 +4,9 @@ def call(String giturl, String branch, String credentialsId = null){
   //git url : giturl , branch : branch
   // or
   git url : "${giturl}" , branch : "${branch}"
+  sh '''
+            echo "data/" > .dockerignore
+            echo "*.tmp" >> .dockerignore
+        '''
   echo "code cloning successfull"
 }
