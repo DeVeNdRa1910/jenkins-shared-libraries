@@ -1,4 +1,4 @@
-def call(Sringe ImageName, String ImageTag){
+def call(String ImageName, String ImageTag){
   withCredentials([usernamePassword(credentialsId: 'dockerHubCred',passwordVariable: 'dockerHubPass',usernameVariable: 'dockerHubUser')]){
       echo "start pushing Image on Docker Hub"
       sh "docker login -u ${usernameVariable} -p ${passwordVariable}"
